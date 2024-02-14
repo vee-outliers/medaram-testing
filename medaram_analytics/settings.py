@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-*@zef-$nd5kp(-mmk_2d@0up)-*ojj01w+%_=7lz=)@!5i@8q(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*','medaram-analytics.onrender.com']
+ALLOWED_HOSTS = ['*','medaram-analytics.onrender.com', "medaram.onrender.com"]
 
 
 # Application definition
@@ -105,13 +105,13 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'NAME': 'medaram_analaytics_db',
+        'NAME': 'medaram',
 
-        'USER': 'medaram_analaytics_db',
+        'USER': 'medaram_user',
 
-        'PASSWORD': 'bvQrozq2X3AWIyNEPT7ENxG92BAOwiIr',
+        'PASSWORD': 'QipMapHYdyBjKyyw7bMz5zMe4gc2q8p7',
 
-        'HOST': 'dpg-cmuesbug1b2c73ehm3fg-a.singapore-postgres.render.com',
+        'HOST': 'dpg-cn67cracn0vc73db2l7g-a',
 
         'PORT': '5432',
 
