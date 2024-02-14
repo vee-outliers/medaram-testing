@@ -1,0 +1,65 @@
+{% extends 'side_bar.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Vehicle Detail Module</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="javascript:void(0);">Vehicle Detail</a></li>
+										<li class="breadcrumb-item active" aria-current="page">Import Vehicle Detail</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+
+							<!-- row -->
+							<div class="row row-sm">
+								<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+									<div class="card box-shadow-0">
+										<div class="card-header border-bottom">
+											<h3 class="card-title">Import Vehicle Detail Form</h3>
+										</div>
+										<div class="card-body">
+											<form class="form-horizontal row" action="{% url 'app:vehicle_details_import' %}" method="post"
+                  enctype="multipart/form-data"> {% csrf_token %}
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="vehicle_details_list">Name</label>
+                                                    <input type="file" id="vehicle_details_list" name="vehicle_details_list" class="form-control" required>
+												</div>
+
+												<div class="form-group mt-3">
+													<div>
+														<button type="submit" class="btn btn-primary">Submit</button>
+														<a href="{% url 'app:vehicle_details_list' %}" >
+															<button type="button" class="btn btn-secondary">Cancel</button>
+														</a>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- row -->
+
+
+
+						</div>
+					</div>
+				</div>
+				<!-- CONTAINER CLOSED -->
+
+
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends 'side_bar.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Manage Buses On Hand</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="javascript:void(0);">Manage Buses On Hand</a></li>
+										<li class="breadcrumb-item active" aria-current="page">Buses On Hand List</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+
+
+
+							<!-- Row -->
+							<div class="row row-sm">
+								<div class="col-lg-12">
+									<div class="row">
+                                        <div class="col-md-12">
+                                          	<a  href="{% url 'app:buses_on_hand_add' %}">
+                                            <input type="button" value="Add Buses On Hand" class="btn btn-primary float-right" style="width: 15%;margin: 0 20px 20px 0;"></a>
+                                        </div>
+                                      </div>
+									<div class="card">
+										{% if messages %}
+											{% for message in messages %}
+											<div class="container-fluid p-0">
+											  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+												<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+												  <span aria-hidden="True">&times;</span>
+												</button>
+												{{ message }}
+											  </div>
+											</div>
+											{% endfor %}
+										{% endif %}
+										<div class="card-header border-bottom">
+											<h3 class="card-title">Buses On Hand List</h3>
+										</div>
+										<div class="card-body">
+											<div class="table-responsive export-table">
+												<table id="listing-table" class="table table-bordered text-nowrap key-buttons border-bottom  w-100">
+													<thead>
+														<tr>
+															<th class="border-bottom-0">Point Name</th>
+															<th class="border-bottom-0">Unique Code</th>
+															<th class="border-bottom-0">Buses(IN/OUT)</th>
+															<th class="border-bottom-0">Actions</th>
+														</tr>
+													</thead>
+													<tbody>
+														{% for buses_on_hand in buses_on_hand_data %}
+                                                          <tr>
+															  <td>{{ buses_on_hand.point_name.point_name }}</td>
+															  <td>{{ buses_on_hand.unique_code }}</td>
+															  <td>{{ buses_on_hand.bus_in_out }}</td>
+															  <td><a class="btn btn-primary fs-14 text-white edit-icn" title="Edit" href="{% url 'app:buses_on_hand_edit' %}?id={{ buses_on_hand.id }}">
+																   	<i class="fe fe-edit fe-pen" title="Edit"></i>
+															   		</a>
+															  </td>
+														  </tr>
+                                                        {% endfor %}
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Row -->
+                      </div>
+					</div>
+				</div>
+				<!-- CONTAINER CLOSED -->
+
+{% endblock %}

@@ -1,0 +1,138 @@
+{% extends 'side_bar.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Manage Idling Buses List</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="javascript:void(0);">Manage Idling Buses List</a></li>
+										<li class="breadcrumb-item active" aria-current="page">Idling Buses List</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+
+
+
+							<!-- Row -->
+							<div class="row row-sm">
+								<div class="col-lg-12">
+<!--									<div class="row">-->
+<!--                                        <div class="col-md-12">-->
+<!--                                          	<a  href="{% url 'app:out_depot_vehicle_send_back_add' %}">-->
+<!--                                            <input type="button" value="Add Out Depot Vehicle Send Back" class="btn btn-primary float-right" style="float:right;margin: 0 20px 20px 0;"></a>-->
+<!--                                        </div>-->
+<!--                                      </div>-->
+									<div class="card">
+										{% if messages %}
+											{% for message in messages %}
+											<div class="container-fluid p-0">
+											  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+												<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+												  <span aria-hidden="True">&times;</span>
+												</button>
+												{{ message }}
+											  </div>
+											</div>
+											{% endfor %}
+										{% endif %}
+										<div class="card-body">
+
+											<form class="form-horizontal row" action="{% url 'app:search_handling_bus_details_list' %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="point_name">Search Point Name</label>
+													<br>
+													<select class="form-control custom-select" name="point_name" id="point_name" required>
+                                                     	<option value="">Select Option</option>
+                                                        	{% for point in point_names %}
+                                                            	<option value="{{ point.id }}">
+                                                                	{{ point.point_name }}
+                                                                </option>
+                                                            {% endfor %}
+                                                    </select>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="select_time_range">Select Time Range</label>
+													<br>
+													<select class="form-control custom-select" name="select_time_range" id="select_time_range" required>
+                                                     	<option value="">Select Option</option>
+														<option value="2">2 hours</option>
+														<option value="3">3 hours</option>
+														<option value="4">4 hours</option>
+														<option value="5">5 hours</option>
+														<option value="6">6 hours</option>
+														<option value="7">7 hours</option>
+														<option value="8">8 hours</option>
+														<option value="9">9 hours</option>
+														<option value="10">10 hours</option>
+                                                    </select>
+												</div>
+
+												<div class="form-group mt-3">
+													<div>
+														<button type="submit" class="btn btn-primary">Search</button>
+													</div>
+												</div>
+											</form>
+										</div>
+
+
+										<div class="card-header border-bottom">
+											<h3 class="card-title">Idling Buses List</h3>
+										</div>
+										<div class="card-body">
+											<div class="table-responsive export-table">
+												<table id="listing-table" class="table table-bordered text-nowrap key-buttons border-bottom  w-100">
+													<thead>
+														<tr>
+															<th class="border-bottom-0">Unique Number</th>
+															<th class="border-bottom-0">Buses Number</th>
+                                                            <th class="border-bottom-0">Parent Depot Name</th>
+															<th class="border-bottom-0">Allotted Depot Name</th>
+															<th class="border-bottom-0">Entry Time in Parking Yard</th>
+                                                            <th class="border-bottom-0">Parking Total time (hrs)</th>
+
+														</tr>
+													</thead>
+													<tbody>
+														{% for point_names in point_names_result %}
+                                                          <tr>
+															  <td><b><a target="_blank" style="text-decoration:underline" href="{% url 'app:display_unique_no_crew_details' %}?id={{ point_names.unique_code }}">{{ point_names.unique_code }}</a></b></td>
+															  <td><b><a target="_blank" style="text-decoration:underline" href="{% url 'app:display_bus_no_crew_details' %}?id={{ point_names.bus_number }}">{{ point_names.bus_number }}</a></b></td>
+															  <td>{{ point_names.parent_depot_name }}</td>
+															  <td>{{ point_names.alloted_depot_name }}</td>
+															  <td>{{ point_names.check_time }}</td>
+															  <td>{{ point_names.hours_difference }}</td>
+														  </tr>
+                                                        {% endfor %}
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Row -->
+                      </div>
+					</div>
+				</div>
+				<!-- CONTAINER CLOSED -->
+
+
+{% endblock %}

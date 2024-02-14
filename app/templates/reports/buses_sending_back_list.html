@@ -1,0 +1,90 @@
+{% extends 'side_bar.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Manage Buses Send Back List</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="javascript:void(0);">Manage Buses Send Back List</a></li>
+										<li class="breadcrumb-item active" aria-current="page">Buses Send Back List</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+
+
+
+							<!-- Row -->
+							<div class="row row-sm">
+								<div class="col-lg-12">
+<!--									<div class="row">-->
+<!--                                        <div class="col-md-12">-->
+<!--                                          	<a  href="{% url 'app:out_depot_vehicle_send_back_add' %}">-->
+<!--                                            <input type="button" value="Add Out Depot Vehicle Send Back" class="btn btn-primary float-right" style="float:right;margin: 0 20px 20px 0;"></a>-->
+<!--                                        </div>-->
+<!--                                      </div>-->
+									<div class="card">
+										{% if messages %}
+											{% for message in messages %}
+											<div class="container-fluid p-0">
+											  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+												<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+												  <span aria-hidden="True">&times;</span>
+												</button>
+												{{ message }}
+											  </div>
+											</div>
+											{% endfor %}
+										{% endif %}
+										<div class="card-header border-bottom">
+											<h3 class="card-title">Buses Send Back List</h3>
+										</div>
+										<div class="card-body">
+											<div class="table-responsive export-table">
+												<table id="listing-table" class="table table-bordered text-nowrap key-buttons border-bottom  w-100">
+													<thead>
+														<tr>
+															<th class="border-bottom-0">Bus Number</th>
+															<th class="border-bottom-0">Send Back Date</th>
+                                                            <th class="border-bottom-0">Send Back Time</th>
+
+														</tr>
+													</thead>
+													<tbody>
+														{% for buses_sending_back in buses_sending_back_data %}
+                                                          <tr>
+															  <td>{{ buses_sending_back.bus_number }}</td>
+                                                              <td>{{ buses_sending_back.created_at|date:"M. d, Y" }}</td>
+															  <!-- Display time -->
+                                                              <td>{{ buses_sending_back.created_at|date:"g:i a" }}</td>
+														  </tr>
+                                                        {% endfor %}
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Row -->
+                      </div>
+					</div>
+				</div>
+				<!-- CONTAINER CLOSED -->
+
+
+{% endblock %}

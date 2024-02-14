@@ -1,0 +1,87 @@
+{% extends 'side_bar.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Update Point Data Details</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="javascript:void(0);">Point Data</a></li>
+										<li class="breadcrumb-item active" aria-current="page">Edit Point Data</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+
+							<!-- row -->
+							<div class="row row-sm">
+								<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+									<div class="card box-shadow-0">
+										<div class="card-header border-bottom">
+											<h3 class="card-title">Edit Point Data Form</h3>
+										</div>
+										<div class="card-body">
+											<form class="form-horizontal row" action="{% url 'app:point_name_update' %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
+
+
+                                                <div class="form-group col-md-6">
+                                                    <label class="form-label" for="point_name">Point Name</label>
+                                                    <input type="text" id="point_name" name="point_name" class="form-control" value="{{point.point_name}}" required>
+												</div>
+
+												<input type="hidden" name="id" value="{{point.id}}">
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="region">Region</label>
+                                                    <input type="text" id="region" name="region" class="form-control" value="{{point.region}}" required>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="zone">Zone</label>
+                                                    <input type="text" id="zone" name="zone" class="form-control" value="{{point.zone}}" required>
+												</div>
+
+												<div class="col-sm-12 col-md-12 col-xl-6">
+													<div class="form-group">
+														<label class="form-label text-muted">Depot:</label>
+														<select class="form-control custom-select" id="depot_id" name="depot_id" data-placeholder="Choose Depot Id..." tabindex="-1" aria-hidden="true" required>
+															{% for depot in depot_data %}
+																<option value="{{ depot.id }}"{% if depot.id in depot_id_list %} selected{% endif %}>{{ depot.name }}</option>
+															{% endfor %}
+														</select>
+													</div>
+												</div>
+
+												<div class="form-group mt-3">
+													<div>
+														<button type="submit" class="btn btn-primary">Submit</button>
+														<a href="{% url 'app:point_data_list' %}" >
+															<button type="button" class="btn btn-secondary">Cancel</button>
+														</a>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- row -->
+						</div>
+					</div>
+				</div>
+				<!-- CONTAINER CLOSED -->
+
+{% endblock %}

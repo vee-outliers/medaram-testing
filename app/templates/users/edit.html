@@ -1,0 +1,121 @@
+{% extends 'side_bar.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Update User Details</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="javascript:void(0);">Users</a></li>
+										<li class="breadcrumb-item active" aria-current="page">Edit User</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+
+							<div class="container">
+								<center>
+									<div id="error-container"></div>
+								</center>
+							</div>
+
+							<!-- row -->
+							<div class="row row-sm">
+								<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+									<div class="card box-shadow-0">
+										<div class="card-header border-bottom">
+											<h3 class="card-title">Edit User Form</h3>
+										</div>
+										<div class="card-body">
+											<form class="form-horizontal row" action="{% url 'app:user_update' %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
+
+
+                                                <div class="form-group col-md-6">
+                                                    <label class="form-label" for="name">Name</label>
+                                                    <input type="text" id="name" name="name" class="form-control" value="{{user.name}}" required>
+												</div>
+
+												<input type="hidden" name="id" value="{{user.id}}">
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="email">Email</label>
+                                                    <input type="email" id="email" name="email" class="form-control" value="{{user.email}}" required>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="password">Password</label>
+                                                    <input type="text" id="password" name="password" class="form-control" value="{{original_password}}" required>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="phone">Phone</label>
+                                                    <input type="text" id="phone" name="phone" class="form-control" value="{{user.phone_number}}" required>
+												</div>
+
+												<div class="col-sm-12 col-md-12 col-xl-6">
+													<div class="form-group">
+														<label class="form-label text-muted">User Role:</label>
+														<select class="form-control custom-select" id="user_type_id" name="user_type_id" data-placeholder="Choose UserType..." tabindex="-1" aria-hidden="true" required>
+															{% for user_type in user_type_data %}
+																<option value="{{ user_type.id }}"{% if user_type.id in user_type_id_list %} selected{% endif %}>{{ user_type.name }}</option>
+															{% endfor %}
+														</select>
+													</div>
+												</div>
+
+												<div class="col-sm-12 col-md-12 col-xl-6">
+													<div class="form-group">
+														<label class="form-label text-muted">Depot: </label>
+														<select class="form-control custom-select" id="user_depot_id" name="user_depot_id" data-placeholder="Choose Depot Id..." tabindex="-1" aria-hidden="true" required>
+															{% for depot in depot_data %}
+																<option value="{{ depot.id }}"{% if depot.id in depot_id_list %} selected{% endif %}>{{ depot.name }}</option>
+															{% endfor %}
+														</select>
+													</div>
+												</div>
+
+												<div class="col-sm-12 col-md-12 col-xl-6">
+													<div class="form-group">
+														<label class="form-label text-muted">Point Name: </label>
+														<select class="form-control custom-select" id="user_point_name" name="user_point_name" tabindex="-1" aria-hidden="true" >
+															<option value="">Select Option</option>
+															{% for point_name in point_name_data %}
+																<option value="{{ point_name.point_name }}"{% if point_name.point_name in point_name_id_list %} selected{% endif %}>{{ point_name.point_name }}</option>
+															{% endfor %}
+														</select>
+													</div>
+												</div>
+
+												<div class="form-group mt-3">
+													<div>
+														<button type="submit" class="btn btn-primary">Submit</button>
+														<a href="{% url 'app:users_list' %}" >
+															<button type="button" class="btn btn-secondary">Cancel</button>
+														</a>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- row -->
+						</div>
+					</div>
+				</div>
+				<!-- CONTAINER CLOSED -->
+
+{% endblock %}

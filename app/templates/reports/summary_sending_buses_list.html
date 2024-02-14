@@ -1,0 +1,96 @@
+{% extends 'side_bar.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Manage Summary of Sending Buses</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="javascript:void(0);">Manage Summary of Sending Buses</a></li>
+										<li class="breadcrumb-item active" aria-current="page">Summary of Sending Buses List</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+
+
+
+							<!-- Row -->
+							<div class="row row-sm">
+								<div class="col-lg-12">
+<!--									<div class="row">-->
+<!--                                        <div class="col-md-12">-->
+<!--                                          	<a  href="{% url 'app:out_depot_vehicle_send_back_add' %}">-->
+<!--                                            <input type="button" value="Add Out Depot Vehicle Send Back" class="btn btn-primary float-right" style="float:right;margin: 0 20px 20px 0;"></a>-->
+<!--                                        </div>-->
+<!--                                      </div>-->
+									<div class="card">
+										{% if messages %}
+											{% for message in messages %}
+											<div class="container-fluid p-0">
+											  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+												<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+												  <span aria-hidden="True">&times;</span>
+												</button>
+												{{ message }}
+											  </div>
+											</div>
+											{% endfor %}
+										{% endif %}
+										<div class="card-header border-bottom">
+											<h3 class="card-title">Summary of Sending Buses List</h3>
+										</div>
+										<div class="card-body">
+											<div class="table-responsive export-table">
+												<table id="listing-table" class="table table-bordered text-nowrap key-buttons border-bottom  w-100">
+													<thead>
+														<tr>
+															<th class="border-bottom-0">Depot Name</th>
+															<th class="border-bottom-0">No of Buses Allotted</th>
+                                                            <th class="border-bottom-0">No of Buses Dispatched</th>
+                                                            <th class="border-bottom-0">No of Buses Due </th>
+                                                            <th class="border-bottom-0">No of Buses Reached</th>
+                                                            <th class="border-bottom-0">No of Buses Not Reached </th>
+
+														</tr>
+													</thead>
+													<tbody>
+														{% for summary_depot in summary_depot_result %}
+                                                          <tr>
+															  <td>{{ summary_depot.depot_name }}</td>
+															  <td>{{ summary_depot.buses_allotted }}</td>
+															  <td><b><a target="_blank" style="text-decoration:underline" href="{% url 'app:buses_dispatched_list' %}?id={{ summary_depot.depot_id }}">{{ summary_depot.buses_dispatched }}</a></b></td>
+															  <td>{{ summary_depot.buses_due }}</td>
+															  <td><b><a target="_blank" style="text-decoration:underline" href="{% url 'app:buses_reached_list' %}?id={{ summary_depot.depot_id }}" >{{ summary_depot.buses_reached }}</a></b></td>
+															  <td><b><a target="_blank" style="text-decoration:underline" href="{% url 'app:buses_not_reached_list' %}?id={{ summary_depot.depot_id}}">{{ summary_depot.buses_not_reached }}</a></b></td>
+
+														  </tr>
+                                                        {% endfor %}
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Row -->
+                      </div>
+					</div>
+				</div>
+				<!-- CONTAINER CLOSED -->
+
+
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends 'side_bar.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title"> Statistics Date Entry - UP journey</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="">Statistics Date Entry - UP journey</a></li>
+										<li class="breadcrumb-item active" aria-current="page"> Add Manage Statistics Date Entry - UP journey</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+							<div class="container">
+								<center>
+									{% if messages %}
+										{% for message in messages %}
+											<div class="container-fluid p-0">
+											  <div class="alert {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %} alert-dismissible" role="alert" >
+												<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+												  <span aria-hidden="True">&times;</span>
+												</button>
+												{{ message }}
+											  </div>
+											</div>
+										{% endfor %}
+									{% endif %}
+								</center>
+							</div>
+
+							<!-- row -->
+							<div class="row row-sm">
+								<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+									<div class="card box-shadow-0">
+										<div class="card-header border-bottom">
+											<h3 class="card-title">Add Manage Statistics Date Entry - UP journey Form</h3>
+										</div>
+										<div class="card-body">
+											<form class="form-horizontal row" action="{% url 'app:statistics_up_journey_add' %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="bus_unique_code">Bus Unique Code</label>
+                                                    <input type="text" id="bus_unique_code" name="bus_unique_code" class="form-control" required>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="total_ticket_amount">Total Ticket Amount</label>
+                                                    <input type="text" id="total_ticket_amount" name="total_ticket_amount" class="form-control" required>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="total_adult_passengers">Total Adult Passengers</label>
+                                                    <input type="text" id="total_adult_passengers" name="total_adult_passengers" class="form-control" required>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="total_child_passengers">Total Child Passengers</label>
+                                                    <input type="text" id="total_child_passengers" name="total_child_passengers" class="form-control" required>
+												</div>
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="mhl_adult_passengers">MHL Adult Passengers</label>
+                                                    <input type="text" id="mhl_adult_passengers" name="mhl_adult_passengers" class="form-control" required>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="mhl_child_passengers">MHL Child Passengers</label>
+                                                    <input type="text" id="mhl_child_passengers" name="mhl_child_passengers" class="form-control" required>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="mhl_adult_amount">MHL Adult Amount</label>
+                                                    <input type="text" id="mhl_adult_amount" name="mhl_adult_amount" class="form-control" required>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="mhl_child_amount">MHL Child Amount</label>
+                                                    <input type="text" id="mhl_child_amount" name="mhl_child_amount" class="form-control" required>
+												</div>
+
+
+												<div class="form-group mt-3">
+													<div>
+														<button type="submit" class="btn btn-primary">Save Statistics Date Entry - UP journey Info</button>
+														<a href="{% url 'app:statistics_up_journey_add' %}">
+															<button type="button" class="btn btn-secondary">Cancel</button>
+														</a>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- row -->
+
+
+
+						</div>
+					</div>
+				</div>
+				<!-- CONTAINER CLOSED -->
+
+
+{% endblock %}

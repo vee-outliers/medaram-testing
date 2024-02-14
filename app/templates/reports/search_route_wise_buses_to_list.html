@@ -1,0 +1,126 @@
+{% extends 'side_bar.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Buses Towards Medaram </h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="javascript:void(0);">Manage Route wise to Buses List </a></li>
+										<li class="breadcrumb-item active" aria-current="page">Route wise to Buses List</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+
+
+
+							<!-- Row -->
+							<div class="row row-sm">
+								<div class="col-lg-12">
+<!--									<div class="row">-->
+<!--                                        <div class="col-md-12">-->
+<!--                                          	<a  href="{% url 'app:out_depot_vehicle_send_back_add' %}">-->
+<!--                                            <input type="button" value="Add Out Depot Vehicle Send Back" class="btn btn-primary float-right" style="float:right;margin: 0 20px 20px 0;"></a>-->
+<!--                                        </div>-->
+<!--                                      </div>-->
+									<div class="card">
+										{% if messages %}
+											{% for message in messages %}
+											<div class="container-fluid p-0">
+											  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+												<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+												  <span aria-hidden="True">&times;</span>
+												</button>
+												{{ message }}
+											  </div>
+											</div>
+											{% endfor %}
+										{% endif %}
+										<div class="card-body">
+
+											<form class="form-horizontal row" action="{% url 'app:search_route_wise_buses_to_list' %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="point_name">Search Point Name</label>
+													<br>
+													<select class="form-control custom-select" name="point_name" id="point_name" required>
+                                                     	<option value="">Select Option</option>
+                                                        	{% for point in point_names %}
+                                                            	<option value="{{ point.id }}">
+                                                                	{{ point.point_name }}
+                                                                </option>
+                                                            {% endfor %}
+                                                    </select>
+												</div>
+
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" >Select Date</label>
+													<br>
+                                                    <input type="date" class="form-control" id="date" name="date" required>
+												</div>
+
+
+												<div class="form-group mt-3">
+													<div>
+														<button type="submit" class="btn btn-primary">Search</button>
+													</div>
+												</div>
+											</form>
+										</div>
+
+
+										<div class="card-header border-bottom">
+											<h3 class="card-title">Route wise to Buses List (TO)</h3>
+										</div>
+										<div class="card-body">
+											<div class="table-responsive export-table">
+												<table id="listing-table" class="table table-bordered text-nowrap key-buttons border-bottom  w-100">
+													<thead>
+														<tr>
+															<th class="border-bottom-0">Point Names</th>
+															<th class="border-bottom-0">Number of Buses</th>
+                                                            <th class="border-bottom-0">Number of Passengers</th>
+                                                            <th class="border-bottom-0">Total Earnings</th>
+
+														</tr>
+													</thead>
+													<tbody>
+														{% for trip_point in trip_point_result %}
+                                                          <tr>
+															  <td>{{ trip_point.point_name }}</td>
+                                                              <td>{{ trip_point.no_of_buses }}</td>
+															  <td>{{ trip_point.total_passengers_count }}</td>
+															  <td>{{ trip_point.total_earnings_count }}</td>
+
+														  </tr>
+                                                        {% endfor %}
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Row -->
+                      </div>
+					</div>
+				</div>
+				<!-- CONTAINER CLOSED -->
+
+
+{% endblock %}

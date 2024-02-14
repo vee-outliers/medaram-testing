@@ -1,0 +1,107 @@
+{% extends 'side_bar.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Manage Out Depot Vehicles Receive</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="javascript:void(0);">Manage Out Depot Vehicles Receive</a></li>
+										<li class="breadcrumb-item active" aria-current="page">Out Depot Vehicles Receive List</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+
+
+
+							<!-- Row -->
+							<div class="row row-sm">
+								<div class="col-lg-12">
+									<div class="row">
+                                        <div class="col-md-12">
+                                        </div>
+                                      </div>
+									<div class="card">
+										{% if messages %}
+											{% for message in messages %}
+											<div class="container-fluid p-0">
+											  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+												<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+												  <span aria-hidden="True">&times;</span>
+												</button>
+												{{ message }}
+											  </div>
+											</div>
+											{% endfor %}
+										{% endif %}
+										<div class="card-header border-bottom">
+											<h3 class="card-title">Out Depot Vehicles Receive List</h3>
+										</div>
+										<div class="card-body">
+											<div class="table-responsive export-table">
+												<table id="out_depot_vehicle_receive-table" class="table table-bordered text-nowrap key-buttons border-bottom  w-100">
+													<thead>
+														<tr>
+															<th class="border-bottom-0">Bus Number</th>
+															<th class="border-bottom-0">Unique Number</th>
+															<th class="border-bottom-0">New Log Sheet No</th>
+															<th class="border-bottom-0">Hsd top_oil liters</th>
+															<th class="border-bottom-0">MTS No</th>
+															<th class="border-bottom-0">Bus Reported Date</th>
+															<th class="border-bottom-0">Bus Reported Time</th>
+															<th class="border-bottom-0">Parent Depot</th>
+															<th class="border-bottom-0">Reported Depot</th>
+															<th class="border-bottom-0">Actions</th>
+														</tr>
+													</thead>
+													<tbody>
+														{% for out_depot_vehicle_receive in out_depot_vehicle_receive_data %}
+                                                          <tr>
+															  <td>{{ out_depot_vehicle_receive.bus_number.bus_number }}</td>
+															  <td>{{ out_depot_vehicle_receive.unique_no }}</td>
+															  <td>{{ out_depot_vehicle_receive.new_log_sheet_no }}</td>
+															  <td>{{ out_depot_vehicle_receive.hsd_top_oil_liters }}</td>
+															  <td>{{ out_depot_vehicle_receive.mts_no }}</td>
+															  <td>{{ out_depot_vehicle_receive.bus_reported_date }}</td>
+															  <td>{{ out_depot_vehicle_receive.bus_reported_time }}</td>
+															   <td>{{ out_depot_vehicle_receive.out_depot_bus_sending_depot.name }}</td>
+															  <td>{{ out_depot_vehicle_receive.out_depot_bus_reporting_depot.name }}</td>
+															  <td>
+																  <a class="btn btn-primary fs-14 text-white edit-icn" title="Edit" href="{% url 'app:out_depot_vehicle_receive_edit' %}?id={{ out_depot_vehicle_receive.id }}">
+																   	<i class="fe fe-edit fe-pen" title="Edit"></i>
+															   		</a>
+															  </td>
+														  </tr>
+                                                        {% endfor %}
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Row -->
+                      </div>
+					</div>
+				</div>
+				<!-- CONTAINER CLOSED -->
+
+
+
+
+
+{% endblock %}

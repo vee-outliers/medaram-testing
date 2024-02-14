@@ -1,0 +1,108 @@
+{% extends 'side_bar.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Update Vehicle Details</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="javascript:void(0);">Vehicle Details</a></li>
+										<li class="breadcrumb-item active" aria-current="page">Edit Vehicle Details</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+
+							<!-- row -->
+							<div class="row row-sm">
+								<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+									<div class="card box-shadow-0">
+										<div class="card-header border-bottom">
+											<h3 class="card-title">Edit Vehicle Details Form</h3>
+										</div>
+										<div class="card-body">
+											<form class="form-horizontal row" action="{% url 'app:vehicle_detail_update' %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
+
+
+                                                <div class="form-group col-md-6">
+                                                    <label class="form-label" for="bus_number">Bus Number</label>
+                                                    <input type="text" id="bus_number" name="bus_number" class="form-control" value="{{vehicle_detail.bus_number}}" required>
+												</div>
+
+												<input type="hidden" name="id" value="{{vehicle_detail.id}}">
+
+												<div class="col-sm-12 col-md-12 col-xl-6">
+													<div class="form-group">
+														<label class="form-label text-muted">Vehicle Name:</label>
+														<select class="form-control custom-select" id="vehicle_id" name="vehicle_id" data-placeholder="Choose Vehicle..." tabindex="-1" aria-hidden="true">
+															{% for vehicle in vehicle_data %}
+																<option value="{{ vehicle.id }}"{% if vehicle.id in vehicle_id_list %} selected{% endif %}>{{ vehicle.name }}</option>
+															{% endfor %}
+														</select>
+													</div>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="vehicle_owner">RTC/PHB</label>
+                                                    <select class="form-control custom-select" id="vehicle_owner" name="vehicle_owner" required>
+														<option>Select one</option>
+														<option value= "RTC" {% if vehicle_detail.vehicle_owner == RTC %} selected {% endif %}>RTC</option>
+														<option value= "PHB" {% if vehicle_detail.vehicle_owner == PHB %} selected {% endif %}>PHB</option>
+													</select>
+												</div>
+
+												<div class="col-sm-12 col-md-12 col-xl-6">
+													<div class="form-group">
+														<label class="form-label text-muted">Depot:</label>
+														<select class="form-control custom-select" id="depot_id" name="depot_id" data-placeholder="Choose Depot..." tabindex="-1" aria-hidden="true">
+															{% for depot in depot_data %}
+																<option value="{{ depot.id }}"{% if depot.id in depot_id_list %} selected{% endif %}>{{ depot.name }}</option>
+															{% endfor %}
+														</select>
+													</div>
+												</div>
+
+												<div class="col-sm-12 col-md-12 col-xl-6">
+													<div class="form-group">
+														<label class="form-label text-muted">Operation Type: </label>
+														<select class="form-control custom-select" id="opt_type" name="opt_type" data-placeholder="Choose Operation Type..." tabindex="-1" aria-hidden="true">
+															{% for operation_type in operation_type_data %}
+																<option value="{{ operation_type.id }}"{% if operation_type.id in operation_type_id_list %} selected{% endif %}>{{ operation_type.name }}</option>
+															{% endfor %}
+														</select>
+													</div>
+												</div>
+
+												<div class="form-group mt-3">
+													<div>
+														<button type="submit" class="btn btn-primary">Submit</button>
+														<a href="{% url 'app:vehicle_details_list' %}" >
+															<button type="button" class="btn btn-secondary">Cancel</button>
+														</a>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- row -->
+						</div>
+					</div>
+				</div>
+				<!-- CONTAINER CLOSED -->
+
+{% endblock %}

@@ -1,0 +1,150 @@
+{% extends 'side_bar.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Hour wise Dispatched Buses List</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="javascript:void(0);">Manage Hour Wise Dispatched Buses</a></li>
+										<li class="breadcrumb-item active" aria-current="page">Hour Wise Dispatched Buses List</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+
+
+
+							<!-- Row -->
+							<div class="row row-sm">
+								<div class="col-lg-12">
+<!--									<div class="row">-->
+<!--                                        <div class="col-md-12">-->
+<!--                                          	<a  href="{% url 'app:out_depot_vehicle_send_back_add' %}">-->
+<!--                                            <input type="button" value="Add Out Depot Vehicle Send Back" class="btn btn-primary float-right" style="float:right;margin: 0 20px 20px 0;"></a>-->
+<!--                                        </div>-->
+<!--                                      </div>-->
+									<div class="card">
+										{% if messages %}
+											{% for message in messages %}
+											<div class="container-fluid p-0">
+											  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+												<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+												  <span aria-hidden="True">&times;</span>
+												</button>
+												{{ message }}
+											  </div>
+											</div>
+											{% endfor %}
+										{% endif %}
+										<div class="card-body">
+
+											<form class="form-horizontal row" action="{% url 'app:search_hour_wise_dispatched_buses_list' %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
+
+                                                <div class="form-group col-md-4">
+                                                    <label class="form-label" >Select Date</label>
+													<br>
+                                                    <input type="date" class="form-control" id="date" name="date" required>
+												</div>
+
+												<div class="form-group col-md-4">
+                                                    <label class="form-label" for="point_name">Towards</label>
+													<br>
+													<select class="form-control custom-select" name="entry_type" id="entry_type" required>
+                                                     	<option value="">Select Option</option>
+														<option value="up">To Medaram</option>
+														<option value="down">From Medaram</option>
+
+                                                    </select>
+												</div>
+
+                                                <div class="form-group col-md-4">
+                                                    <label class="form-label" for="point_name">Search Point Name</label>
+													<br>
+													<select class="form-control custom-select" name="point_name" id="point_name" required>
+                                                     	<option value="">Select Option</option>
+                                                        	{% for point in point_names %}
+                                                            	<option value="{{ point.id }}">
+                                                                	{{ point.point_name }}
+                                                                </option>
+                                                            {% endfor %}
+                                                    </select>
+												</div>
+
+
+
+												<div class="form-group mt-3">
+													<div>
+														<button type="submit" class="btn btn-primary">Search</button>
+													</div>
+												</div>
+											</form>
+										</div>
+
+
+										<div class="card-header border-bottom">
+											<h3 class="card-title">Hour Wise Dispatched Buses List</h3>
+										</div>
+										<div class="card-body">
+											<div class="table-responsive export-table">
+												<table id="listing-table" class="table table-bordered text-nowrap key-buttons border-bottom  w-100">
+													<thead>
+														<tr>
+															<th class="border-bottom-0">Time</th>
+															<th class="border-bottom-0">No of Trips</th>
+                                                            <th class="border-bottom-0">No of Fair Adult Pssg</th>
+															<th class="border-bottom-0">No of Fair Child Pssg</th>
+															<th class="border-bottom-0">Total Fare pssg Amount</th>
+                                                            <th class="border-bottom-0">No of MHL Adult Pssg</th>
+															<th class="border-bottom-0">No of MHL Child Pssg</th>
+															<th class="border-bottom-0">MHL Amount</th>
+															<th class="border-bottom-0">Total Pssg</th>
+															<th class="border-bottom-0">Total Earnings</th>
+<!--															<th class="border-bottom-0">Upto Pssg</th>-->
+<!--															<th class="border-bottom-0">Upto Earnings</th>-->
+
+														</tr>
+													</thead>
+													<tbody>
+														{% for trip_point in trip_point_result %}
+                                                          <tr>
+															  <td>{{trip_point.start_time}} - {{trip_point.end_time}}</td>
+															  <td>{{ trip_point.no_of_trips }}</td>
+															  <td>{{ trip_point.no_of_fair_adult_pssg }}</td>
+															  <td>{{ trip_point.no_of_fair_child_pssg }}</td>
+															  <td>{{ trip_point.total_fare_pssg_amount }}</td>
+															  <td>{{ trip_point.no_of_mhl_adult_pssg }}</td>
+															  <td>{{ trip_point.no_of_mhl_child_pssg }}</td>
+															  <td>{{ trip_point.total_mhl_amount }}</td>
+															  <td>{{ trip_point.total_passg }}</td>
+															  <td>{{ trip_point.total_earnings }}</td>
+														  </tr>
+                                                        {% endfor %}
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Row -->
+                      </div>
+					</div>
+				</div>
+				<!-- CONTAINER CLOSED -->
+
+
+{% endblock %}

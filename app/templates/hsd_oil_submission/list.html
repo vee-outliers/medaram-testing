@@ -1,0 +1,98 @@
+{% extends 'side_bar.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Manage HSD Oil Submission</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="javascript:void(0);">Manage HSD Oil Submission</a></li>
+										<li class="breadcrumb-item active" aria-current="page">HSD Oil Submission List</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+
+
+
+							<!-- Row -->
+							<div class="row row-sm">
+								<div class="col-lg-12">
+									<div class="row">
+                                        <div class="col-md-12">
+                                        </div>
+                                      </div>
+									<div class="card">
+										{% if messages %}
+											{% for message in messages %}
+											<div class="container-fluid p-0">
+											  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+												<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+												  <span aria-hidden="True">&times;</span>
+												</button>
+												{{ message }}
+											  </div>
+											</div>
+											{% endfor %}
+										{% endif %}
+										<div class="card-header border-bottom">
+											<h3 class="card-title">HSD Oil Submission List</h3>
+										</div>
+										<div class="card-body">
+											<div class="table-responsive export-table">
+												<table id="listing-table" class="table table-bordered text-nowrap key-buttons border-bottom  w-100">
+													<thead>
+														<tr>
+															<th class="border-bottom-0">Unique No/Bus Number</th>
+															<th class="border-bottom-0">Point Name</th>
+															<th class="border-bottom-0">Hsd liters</th>
+															<th class="border-bottom-0">MTS No</th>
+															<th class="border-bottom-0">Shift</th>
+															<th class="border-bottom-0">Actions</th>
+														</tr>
+													</thead>
+													<tbody>
+														{% for hsd_oil_submission in hsd_oil_submission_data %}
+                                                          <tr>
+															  <td>{{ hsd_oil_submission.unique_no_bus_no }}</td>
+															  <td>{{ hsd_oil_submission.point_name }}</td>
+															  <td>{{ hsd_oil_submission.hsd_liters }}</td>
+															  <td>{{ hsd_oil_submission.mts_no }}</td>
+															  <td>{{ hsd_oil_submission.shift }}</td>
+															  <td><a class="btn btn-primary fs-14 text-white edit-icn" title="Edit" href="{% url 'app:hsd_oil_submission_edit' %}?id={{ hsd_oil_submission.id }}">
+																   	<i class="fe fe-edit fe-pen" title="Edit"></i>
+															   		</a>
+															  </td>
+														  </tr>
+                                                        {% endfor %}
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Row -->
+                      </div>
+					</div>
+				</div>
+				<!-- CONTAINER CLOSED -->
+
+
+
+
+
+{% endblock %}

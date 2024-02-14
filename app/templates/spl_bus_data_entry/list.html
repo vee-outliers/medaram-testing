@@ -1,0 +1,125 @@
+{% extends 'side_bar.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Manage Special Bus Data Entry details</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="javascript:void(0);">Manage Special Bus Data Entry details</a></li>
+										<li class="breadcrumb-item active" aria-current="page">Special Bus Data Entry List</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+
+
+
+							<!-- Row -->
+							<div class="row row-sm">
+								<div class="col-lg-12">
+									<div class="row">
+                                        <div class="col-md-12">
+                                          	<a  href="{% url 'app:spl_bus_data_entry_add' %}">
+                                            <input type="button" value="Add SPL Bus Data Entry" class="btn btn-primary float-right" style="width: 15%;margin: 0 20px 20px 0;"></a>
+                                        </div>
+                                      </div>
+									<div class="card">
+										<center>
+										{% if messages %}
+											{% for message in messages %}
+											<div class="container-fluid p-0">
+											  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+												<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+												  <span aria-hidden="True">&times;</span>
+												</button>
+												{{ message }}
+											  </div>
+											</div>
+											{% endfor %}
+										{% endif %}
+										</center>
+										<div class="card-header border-bottom">
+											<h3 class="card-title">Special Bus Data Entry List</h3>
+										</div>
+										<div class="card-body">
+											<div class="table-responsive export-table">
+												<table id="listing-table" class="table table-bordered text-nowrap key-buttons border-bottom  w-100">
+													<thead>
+														<tr>
+															<th class="border-bottom-0">SPL Bus Sending Depot</th>
+															<th class="border-bottom-0">SPL Bus Reporting Depot</th>
+															<th class="border-bottom-0">Bus Type</th>
+															<th class="border-bottom-0">Bus Number</th>
+															<th class="border-bottom-0">Log Sheet No</th>
+															<th class="border-bottom-0">Driver1 Name</th>
+															<th class="border-bottom-0">Driver1 Staff Number</th>
+															<th class="border-bottom-0">Driver1 Phone Number</th>
+															<th class="border-bottom-0">Driver2 Name</th>
+															<th class="border-bottom-0">Driver2 Staff Number</th>
+															<th class="border-bottom-0">Driver2 Phone Number</th>
+															<th class="border-bottom-0">Incharge Name</th>
+															<th class="border-bottom-0">Incharge Phone Number</th>
+															<th class="border-bottom-0">Status</th>
+															<th class="border-bottom-0">Actions</th>
+														</tr>
+													</thead>
+													<tbody>
+														{% for spl_bus_data_entry in spl_bus_data_entry_data %}
+                                                          <tr>
+															  <td>{{ spl_bus_data_entry.special_bus_sending_depot.name }}</td>
+															  <td>{{ spl_bus_data_entry.special_bus_reporting_depot.name }}</td>
+															  <td>{{ spl_bus_data_entry.bus_type.name }}</td>
+															  <td>{{ spl_bus_data_entry.bus_number.bus_number }}</td>
+															  <td>{{ spl_bus_data_entry.log_sheet_no }}</td>
+															  <td>{{ spl_bus_data_entry.driver1_name }}</td>
+															  <td>{{ spl_bus_data_entry.driver1_staff_no }}</td>
+															  <td>{{ spl_bus_data_entry.driver1_phone_number }}</td>
+															  <td>{{ spl_bus_data_entry.driver2_name }}</td>
+															  <td>{{ spl_bus_data_entry.driver2_staff_no }}</td>
+															  <td>{{ spl_bus_data_entry.driver2_phone_number }}</td>
+															  <td>{{ spl_bus_data_entry.incharge_name }}</td>
+															  <td>{{ spl_bus_data_entry.incharge_phone_number }}</td>
+															  {% if spl_bus_data_entry.status == 0 %}
+															  	<td>Active</td>
+															  {% endif %}
+															  {% if spl_bus_data_entry.status == 1 %}
+															  	<td>In Active</td>
+															  {% endif %}
+															  <td><a class="btn btn-primary fs-14 text-white edit-icn" title="Edit" href="{% url 'app:spl_bus_data_entry_edit' %}?id={{ spl_bus_data_entry.id }}">
+																   	<i class="fe fe-edit fe-pen" title="Edit"></i>
+															   		</a>
+															  </td>
+														  </tr>
+                                                        {% endfor %}
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Row -->
+                      </div>
+					</div>
+				</div>
+				<!-- CONTAINER CLOSED -->
+
+
+
+
+
+{% endblock %}

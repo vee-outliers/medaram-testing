@@ -1,0 +1,190 @@
+{% extends 'side_bar.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Update Trip End</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="javascript:void(0);">Trip End</a></li>
+										<li class="breadcrumb-item active" aria-current="page">Edit Trip End</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+
+
+
+							<!-- row -->
+							<div class="row row-sm">
+								<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+									<div class="card box-shadow-0">
+										<div class="card-header border-bottom">
+											<h3 class="card-title">Edit Trip End Form</h3>
+										</div>
+										<div class="card-body">
+											<form class="form-horizontal row" action="{% url 'app:search_trip_end_form' %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="unique_no">Unique No</label>
+													<br>
+													<select class="form-control custom-select" name="unique_no" id="unique_no" required>
+                                                     	<option value="">Select Option</option>
+                                                        	{% for trip_unqiue in trip_unqiue_no %}
+                                                            	<option value="{{ trip_unqiue }}">
+                                                                	{{ trip_unqiue }}
+                                                                </option>
+                                                            {% endfor %}
+                                                    </select>
+												</div>
+
+												<div class="form-group mt-3">
+													<div>
+														<button type="submit" class="btn btn-primary">Search</button>
+													</div>
+												</div>
+											</form>
+										</div>
+
+										<div class="container">
+                                            <center>
+                                                {% if messages %}
+													{% for message in messages %}
+														<div class="container-fluid p-0">
+											  				<div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+																<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+												  					<span aria-hidden="True">&times;</span>
+																</button>
+																{{ message }}
+											  				</div>
+														</div>
+													{% endfor %}
+												{% endif %}
+                                            </center>
+                                        </div>
+
+										<div class="card-body">
+											<form class="form-horizontal row" action="{% url 'app:trip_end_add' %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
+
+                                                <input type="hidden" name="id" value="{{last_trip_details.id}}">
+
+                                                 <div class="row row-sm">
+                                                                <div class="col-lg">
+                                                                    <label class="form-label" >Journey:</label>
+                                                                    <input class="form-control mb-4" name="entry_type" value="{{last_trip_details.entry_type}}" type="text" readonly>
+                                                                </div>
+                                                                <div class="col-lg">
+                                                                   <label class="form-label" >From:</label>
+                                                                   <input type="text" class="form-control mb-4" name="start_from_location" value="{{last_trip_details.start_from_location.point_name}}"  readonly>
+                                                                </div>
+                                                                <div class="col-lg">
+                                                                    <label class="form-label" >To:</label>
+                                                                    <input type="text" class="form-control mb-4" name="start_to_location" value="{{last_trip_details.start_to_location.point_name}}" readonly>
+                                                                </div>
+                                                  </div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label">Unique No:</label>
+                                                    <input type="text"  class="form-control" value="{{last_trip_details.unique_code}}" readonly>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" >Point Name:</label>
+                                                    <input type="text" class="form-control" value="{{last_trip_details.start_from_location.point_name}}" readonly>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label">Bus Number:</label>
+                                                    <input type="text"  class="form-control" value="{{last_trip_details.bus_number}}" readonly>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label">Entry Type:</label>
+                                                    <input type="text"  class="form-control" value="{{last_trip_details.entry_type}}" readonly>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" >Total Ticket Amount:</label>
+                                                    <input type="number" class="form-control" min="0" name="total_ticket_amount" value="{{last_trip_details.total_ticket_amount}}" required>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label">Total Adult Passengers:</label>
+                                                    <input type="number"  class="form-control" min='0' name="total_adult_passengers"  value="{{last_trip_details.total_adult_passengers}}" required>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" >Total Child Passengers:</label>
+                                                    <input type="number" class="form-control" min='0' name="total_child_passengers" value="{{last_trip_details.total_child_passengers}}" required>
+												</div>
+
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" >MHL Adult Passengers:</label>
+                                                    <input type="number" class="form-control" min='0' name="mhl_adult_passengers" value="{{last_trip_details.mhl_adult_passengers}}" required>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label">MHL Child Passengers:</label>
+                                                    <input type="number"  class="form-control" min='0' name="mhl_child_passengers" value="{{last_trip_details.mhl_child_passengers}}" required>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" >MHL Adult Amount:</label>
+                                                    <input type="number" class="form-control"  min='0' name="mhl_adult_amount" value="{{last_trip_details.mhl_adult_amount}}" required>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label">MHL Child Amount:</label>
+                                                    <input type="number"  class="form-control"  min='0' name="mhl_child_amount"  value="{{last_trip_details.mhl_child_amount}}" required>
+												</div>
+
+
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="trip_verified">Trip Verified</label>
+                                                    <select class="form-control custom-select" id="trip_verified" name="trip_verified" required>
+														<option>Select one</option>
+														<option value= "True" {% if last_trip_details.trip_verified == True %} selected {% endif %}>Yes</option>
+														<option value= "False" {% if last_trip_details.trip_verified == False %} selected {% endif %}>No</option>
+													</select>
+												</div>
+
+												<div class="form-group col-md-6">
+													<label class="form-label">Service Operated Date:</label>
+                                                    <input type="date"  class="form-control" name="service_operated_date" value="{{last_trip_details.service_operated_date|date:'Y-m-d'}}" required>
+												</div>
+
+
+												<div class="form-group mt-3">
+													<div>
+														<button type="submit" class="btn btn-primary">Submit</button>
+														<a href="{% url 'app:trip_end_add' %}" >
+															<button type="button" class="btn btn-secondary">Cancel</button>
+														</a>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- row -->
+						</div>
+					</div>
+				</div>
+				<!-- CONTAINER CLOSED -->
+
+{% endblock %}

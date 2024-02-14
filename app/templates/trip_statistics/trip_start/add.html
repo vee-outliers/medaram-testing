@@ -1,0 +1,196 @@
+{% extends 'side_bar.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title"> Trip Statistics - Trip Start</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="">Trip Statistics - Trip Start</a></li>
+										<li class="breadcrumb-item active" aria-current="page"> Add Trip Statistics - Trip Start</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+							<div class="container">
+								<center>
+									{% if messages %}
+										{% for message in messages %}
+											<div class="container-fluid p-0">
+												<div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+													<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+												  		<span aria-hidden="True">&times;</span>
+													</button>
+													{{ message }}
+												</div>
+											</div>
+										{% endfor %}
+									{% endif %}
+								</center>
+							</div>
+
+							<!-- row -->
+							<div class="row row-sm">
+								<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+									<div class="card box-shadow-0">
+										<div class="card-header border-bottom">
+										<h3 class="card-title">Trip Start</h3>
+										</div>
+										<div class="card-body">
+											<form class="form-horizontal row" action="{% url 'app:trip_start_add' %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
+
+                                               {% if request.session.point_name != 'Thadvai' %}
+
+													{% if request.session.user_type == 'PSG ENTRY UP' or request.session.user_type == 'Super_admin' %}
+
+                                                            <div class="row row-sm">
+                                                                <div class="col-lg">
+                                                                    <label class="form-label" >Journey:</label>
+                                                                    <input class="form-control mb-4" name="entry_type" value="up" type="text" readonly>
+                                                                </div>
+                                                                <div class="col-lg">
+                                                                   <label class="form-label" >From:</label>
+                                                                   <input type="text" class="form-control mb-4" name="start_from_location" value="{{request.session.point_name}}"  readonly>
+                                                                </div>
+                                                                <div class="col-lg">
+                                                                    <label class="form-label" >To:</label>
+                                                                    <input type="text" class="form-control mb-4" name="start_to_location" value="Thadvai" readonly>
+                                                                </div>
+                                                            </div>
+													{% endif %}
+
+												{% else %}
+
+                                                          <div class="row row-sm">
+                                                              <div class="col-md-4">
+                                                                  <label class="form-label" >Journey:</label>
+                                                                  <input class="form-control mb-4" name="entry_type" value="down" type="text" readonly>
+                                                              </div>
+
+                                                              <div class="col-md-4">
+                                                                   <label class="form-label" >From:</label>
+                                                                   <input type="text" class="form-control mb-4" name="start_from_location" value="{{request.session.point_name}}"  readonly>
+                                                              </div>
+
+                                                              <div class="col-md-4">
+                                                                  <label for="validationCustom04" class="form-label">To</label>
+                                                                  <select class="form-select custom-select" id="point"  name="start_to_location" required>
+                                                                        <option value="">Select Option</option>
+                                                                        {% for point in point_data %}
+                                                                            <option value="{{ point.point_name }}">
+                                                                                {{ point.point_name }}
+                                                                            </option>
+                                                                        {% endfor %}
+                                                                  </select>
+                                                               </div>
+
+                                                          </div>
+
+                                               {% endif %}
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="trip_start_unique_no">Unique No</label>
+													<select class="form-control custom-select" name="trip_start_unique_no" id="trip_start_unique_no" required>
+                                                     	<option value="">Select Option</option>
+                                                        	{% for data in combined_data %}
+                                                            	<option value="{{ data.unique_no }}">
+                                                                	{{ data.unique_no }}
+                                                                </option>
+                                                            {% endfor %}
+                                                    </select>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="trip_start_bus_number">Bus Number</label>
+                                                    <input type="text" id="trip_start_bus_number" name="trip_start_bus_number" class="form-control" readonly>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="point_name">Point Name</label>
+                                                    <input type="text" id="point_name" name="point_name" class="form-control" value="{{request.session.point_name}}" readonly>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="type">Booking Type</label>
+                                                    <select class="form-control custom-select" id="type" name="type" required>
+														<option value="">Select Option</option>
+															<option value='ground_booking'>Ground booking</option>
+															<option value='conductor'>Conductor</option>
+													</select>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="total_ticket_amount">Total Ticket Amount</label>
+                                                    <input type="number" id="total_ticket_amount" name="total_ticket_amount" min="0" class="form-control" required>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="total_adult_passengers">Total Adult Passengers</label>
+                                                    <input type="number" id="total_adult_passengers" name="total_adult_passengers" min="0" class="form-control" required>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="total_child_passengers">Total Child Passengers</label>
+                                                    <input type="number" id="total_child_passengers" name="total_child_passengers" min="0" class="form-control" required>
+												</div>
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="mhl_adult_passengers">MHL Adult Passengers</label>
+                                                    <input type="number" id="mhl_adult_passengers" name="mhl_adult_passengers" min="0" class="form-control" required>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="mhl_child_passengers">MHL Child Passengers</label>
+                                                    <input type="number" id="mhl_child_passengers" name="mhl_child_passengers" min="0" class="form-control" required>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="mhl_adult_amount">MHL Adult Amount</label>
+                                                    <input type="number" id="mhl_adult_amount" name="mhl_adult_amount"  min="0" class="form-control" required>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="mhl_child_amount">MHL Child Amount</label>
+                                                    <input type="number" id="mhl_child_amount" name="mhl_child_amount" min="0" class="form-control" required>
+												</div>
+
+												<div class="form-group col-md-6">
+													<label class="form-label">Service Operated Date:</label>
+                                                    <input type="date"  class="form-control" name="service_operated_date" required>
+												</div>
+
+
+												<div class="form-group mt-3">
+													<div>
+														<button type="submit" class="btn btn-primary">Submit</button>
+														<a href="{% url 'app:trip_start_add' %}">
+															<button type="button" class="btn btn-secondary">Cancel</button>
+														</a>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- row -->
+
+
+
+						</div>
+					</div>
+				</div>
+				<!-- CONTAINER CLOSED -->
+
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'side_bar.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Update Buses On Hand Details</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="javascript:void(0);">Buses On Hand</a></li>
+										<li class="breadcrumb-item active" aria-current="page">Edit Buses On Hand</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+
+							<!-- row -->
+							<div class="row row-sm">
+								<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+									<div class="card box-shadow-0">
+										<div class="card-header border-bottom">
+											<h3 class="card-title">Edit Buses On Hand Form</h3>
+										</div>
+										<div class="card-body">
+											<form class="form-horizontal row" action="{% url 'app:buses_on_hand_update' %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
+
+												<input type="hidden" name="id" value="{{buses_on_hand_data.id}}">
+
+												<div class="col-sm-12 col-md-12 col-xl-6">
+													<div class="form-group">
+														<label class="form-label text-muted">Point Name: </label>
+														<select class="form-control custom-select" id="point_name_id" name="point_name_id" data-placeholder="Choose Point Name Id..." tabindex="-1" aria-hidden="true" required>
+															{% for point_name in point_name_data %}
+																<option value="{{ point_name.id }}"{% if point_name.id in point_name_id_list %} selected{% endif %}>{{ point_name.point_name }}</option>
+															{% endfor %}
+														</select>
+													</div>
+												</div>
+
+												 <div class="form-group col-md-6">
+                                                    <label class="form-label" for="unique_code">Unique Code</label>
+                                                    <input type="text" id="unique_code" name="unique_code"  value="{{buses_on_hand_data.unique_code}}" class="form-control" readonly>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="bus_in_out">Bus IN/OUT</label>
+                                                    <select class="form-control custom-select" id="bus_in_out" name="bus_in_out" required>
+														<option>Select one</option>
+														<option value= "in" {% if buses_on_hand_data.bus_in_out == "in" %} selected {% endif %}>IN</option>
+														<option value= "out" {% if buses_on_hand_data.bus_in_out == "out" %} selected {% endif %}>OUT</option>
+													</select>
+												</div>
+
+												<div class="form-group mt-3">
+													<div>
+														<button type="submit" class="btn btn-primary">Submit</button>
+														<a href="{% url 'app:buses_on_hand_list' %}" >
+															<button type="button" class="btn btn-secondary">Cancel</button>
+														</a>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- row -->
+						</div>
+					</div>
+				</div>
+				<!-- CONTAINER CLOSED -->
+
+{% endblock %}

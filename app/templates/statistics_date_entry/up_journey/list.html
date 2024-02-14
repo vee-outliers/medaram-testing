@@ -1,0 +1,109 @@
+{% extends 'side_bar.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Manage Statistics Date Entry - UP journey</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="javascript:void(0);">Manage Statistics Date Entry - UP journey</a></li>
+										<li class="breadcrumb-item active" aria-current="page">Statistics Date Entry - UP journey List</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+
+
+
+							<!-- Row -->
+							<div class="row row-sm">
+								<div class="col-lg-12">
+									<div class="row">
+                                        <div class="col-md-12">
+                                          	<a  href="{% url 'app:statistics_up_journey_add' %}">
+                                            <input type="button" value="Add Statistics Date Entry - UP journey" class="btn btn-primary float-right" style="float:right;margin: 0 20px 20px 0;"></a>
+                                        </div>
+                                      </div>
+									<div class="card">
+										{% if messages %}
+											{% for message in messages %}
+											<div class="container-fluid p-0">
+											  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+												<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+												  <span aria-hidden="True">&times;</span>
+												</button>
+												{{ message }}
+											  </div>
+											</div>
+											{% endfor %}
+										{% endif %}
+										<div class="card-header border-bottom">
+											<h3 class="card-title">Statistics Date Entry - UP journey List</h3>
+										</div>
+										<div class="card-body">
+											<div class="table-responsive export-table">
+												<table id="listing-table" class="table table-bordered text-nowrap key-buttons border-bottom  w-100">
+													<thead>
+														<tr>
+															<th class="border-bottom-0">Bus Unique Code</th>
+															<th class="border-bottom-0">Total Ticket Amount</th>
+															<th class="border-bottom-0">Total Adult Passengers</th>
+															<th class="border-bottom-0">Total Child Passengers</th>
+															<th class="border-bottom-0">MHL Adult Passengers</th>
+															<th class="border-bottom-0">MHL Child Passengers</th>
+															<th class="border-bottom-0">MHL Adult Amount</th>
+															<th class="border-bottom-0">MHL Child Amount</th>
+															<th class="border-bottom-0">service_operated_date</th>
+                                                            <th class="border-bottom-0">Created At</th>
+															<th class="border-bottom-0">Actions</th>
+
+														</tr>
+													</thead>
+													<tbody>
+														{% for statistics_up_journey in statistics_up_journey_data %}
+                                                          <tr>
+															  <td>{{ statistics_up_journey.bus_unique_code }}</td>
+															  <td>{{ statistics_up_journey.total_ticket_amount }}</td>
+															  <td>{{ statistics_up_journey.total_adult_passengers }}</td>
+															  <td>{{ statistics_up_journey.total_child_passengers }}</td>
+															  <td>{{ statistics_up_journey.mhl_adult_passengers }}</td>
+															  <td>{{ statistics_up_journey.mhl_child_passengers }}</td>
+															  <td>{{ statistics_up_journey.mhl_adult_amount }}</td>
+															  <td>{{ statistics_up_journey.mhl_child_amount }}</td>
+															  <td>{{ statistics_up_journey.service_operated_date }}</td>
+                                                              <td>{{ statistics_up_journey.created_at }}</td>
+															  <td><a class="btn btn-primary fs-14 text-white edit-icn" title="Edit" href="{% url 'app:statistics_up_journey_edit' %}?id={{ statistics_up_journey.id }}">
+																   	<i class="fe fe-edit fe-pen" title="Edit"></i>
+															   		</a>
+															  </td>
+														  </tr>
+                                                        {% endfor %}
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Row -->
+                      </div>
+					</div>
+				</div>
+				<!-- CONTAINER CLOSED -->
+
+
+
+{% endblock %}

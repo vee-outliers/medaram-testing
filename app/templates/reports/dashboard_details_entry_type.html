@@ -1,0 +1,141 @@
+{% extends 'side_bar.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Dashboard</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="">Dashboard</a></li>
+										<li class="breadcrumb-item active" aria-current="page">Day Wise Performance</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+							<div class="container">
+								<center>
+									{% if messages %}
+										{% for message in messages %}
+											<div class="container-fluid p-0">
+											  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+												<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+												  <span aria-hidden="True">&times;</span>
+												</button>
+												{{ message }}
+											  </div>
+											</div>
+										{% endfor %}
+									{% endif %}
+									<div id="error-container"></div>
+								</center>
+							</div>
+
+							<!-- row -->
+							<div class="row row-sm">
+								<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+									<div class="card box-shadow-0">
+<!--										<div class="card-header border-bottom">-->
+<!--											<h3 class="card-title">Add SPL Bus Data Entry Form</h3>-->
+<!--										</div>-->
+										<div class="card-body bg-light">
+											<form class="form-horizontal row" action="{% url 'app:dashboard_details_entry_type' %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
+												<div class="card mb-3">
+            										<div class="card-body">
+														<div class="row">
+											    			<div class="form-group col-md-6">
+                                                    			<label class="form-label" for="point_name">Point Name</label>
+																<select class="form-control custom-select" name="point_name" id="point_name" required>
+                                                     				<option value="">Select Option</option>
+                                                        			{% for point in point_names %}
+                                                            			<option value="{{ point.point_name }}">
+                                                                			{{ point.point_name }}
+                                                                		</option>
+                                                            		{% endfor %}
+                                                    			</select>
+															</div>
+
+															<div class="form-group col-md-6">
+                                                    			<label class="form-label" for="entry_type">Entry Type</label>
+                                                    			<select class="form-control custom-select" id="entry_type" name="entry_type" required>
+																	<option value="">Select Option</option>
+																	<option value='up'>Up - Towards Medaram</option>
+																	<option value='down'>Down - From Medaram</option>
+																</select>
+															</div>
+
+															<div class="form-group mt-3">
+																<div>
+																	<button type="submit" class="btn btn-primary">Submit</button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<div class="card mb-4">
+												<div class="card-body">
+													<div class="row">
+														<div class="card-body">
+															<div class="table-responsive export-table">
+																<table id="listing-table" class="table table-bordered text-nowrap key-buttons border-bottom  w-100" style="{overflow-x: auto;}">
+																	<thead>
+																		<tr>
+																			<th class="border-bottom-0">Date</th>
+																			<th class="border-bottom-0">No of fare adult passengers</th>
+																			<th class="border-bottom-0">No of fare child passengers</th>
+                                                            				<th class="border-bottom-0">Total fare passenger amount</th>
+                                                            				<th class="border-bottom-0">No of mhl adult passengers</th>
+																			<th class="border-bottom-0">No of mhl child passengers</th>
+																			<th class="border-bottom-0">MHL Amount</th>
+																			<th class="border-bottom-0">Total Passengers</th>
+																			<th class="border-bottom-0">Total Earnings</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		{% for trip_data in dashboard_data %}
+                                                          					<tr>
+															  					<td>{{ trip_data.date }}</td>
+                                                              					<td>{{ trip_data.total_adult_passengers }}</td>
+															  					<td>{{ trip_data.total_child_passengers }}</td>
+															  					<td>{{ trip_data.total_fare_passenger_amount }}</td>
+															  					<td>{{ trip_data.mhl_adult_passengers }}</td>
+															  					<td>{{ trip_data.mhl_child_passengers }}</td>
+															  					<td>{{ trip_data.total_mhl_amount }}</td>
+															  					<td>{{ trip_data.total_passengers }}</td>
+															  					<td>{{ trip_data.total_earnings }}</td>
+														  					</tr>
+                                                        				{% endfor %}
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>
+												</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- row -->
+
+
+
+						</div>
+					</div>
+				</div>
+				<!-- CONTAINER CLOSED -->
+
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends 'side_bar.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Manage Trip check List</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="javascript:void(0);">Manage Trip check List</a></li>
+										<li class="breadcrumb-item active" aria-current="page">Trip check List</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+
+
+
+							<!-- Row -->
+							<div class="row row-sm">
+								<div class="col-lg-12">
+									<div class="row">
+                                        <div class="col-md-12">
+                                        </div>
+                                    </div>
+
+									<div class="card">
+										{% if messages %}
+											{% for message in messages %}
+											<div class="container-fluid p-0">
+											  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+												<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+												  <span aria-hidden="True">&times;</span>
+												</button>
+												{{ message }}
+											  </div>
+											</div>
+											{% endfor %}
+										{% endif %}
+										<div class="card-body">
+
+											<form class="form-horizontal row" action="{% url 'app:search_unique_no_trip_check_list' %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="unique_no">Unique No</label>
+													<br>
+													<select class="form-control custom-select" name="unique_no" id="unique_no" required>
+                                                     	<option value="">Select Option</option>
+                                                        	{% for out_depot_vehicle_receive in out_depot_vehicle_receive_data %}
+                                                            	<option value="{{ out_depot_vehicle_receive.unique_no }}">
+                                                                	{{ out_depot_vehicle_receive.unique_no }}
+                                                                </option>
+                                                            {% endfor %}
+                                                    </select>
+												</div>
+
+												<div class="form-group mt-3">
+													<div>
+														<button type="submit" class="btn btn-primary">Search</button>
+													</div>
+												</div>
+											</form>
+										</div>
+										<div class="card-header border-bottom">
+											<h3 class="card-title">Trip Check List</h3>
+										</div>
+										<div class="card-body">
+											<div class="table-responsive export-table">
+												<table id="listing-table" class="table table-bordered text-nowrap key-buttons border-bottom  w-100">
+													<thead>
+														<tr>
+															<th class="border-bottom-0">Unique Number</th>
+															<th class="border-bottom-0">Bus Number</th>
+															<th class="border-bottom-0">Point Name</th>
+															<th class="border-bottom-0">Entry Type</th>
+															<th class="border-bottom-0">Total Ticket Amount</th>
+															<th class="border-bottom-0">Total Adult Passengers</th>
+															<th class="border-bottom-0">Total Child Passengers</th>
+                                                            <th class="border-bottom-0">MHL Adult Passengers</th>
+															<th class="border-bottom-0">MHL Child Passengers</th>
+															<th class="border-bottom-0">MHL Adult Amount</th>
+															<th class="border-bottom-0">MHL Child Amount</th>
+															<th class="border-bottom-0">Action</th>
+														</tr>
+													</thead>
+													<tbody>
+														{% for trip_check in trip_check_list %}
+                                                          <tr>
+															  <td>{{ trip_check.unique_code }}</td>
+															  <td>{{ trip_check.bus_number }}</td>
+															  <td>{{ trip_check.point_name.point_name }}</td>
+															  <td>{{ trip_check.entry_type }}</td>
+															  <td>{{ trip_check.total_ticket_amount }}</td>
+															  <td>{{ trip_check.total_adult_passengers }}</td>
+															  <td>{{ trip_check.total_child_passengers }}</td>
+															  <td>{{ trip_check.mhl_adult_passengers }}</td>
+															  <td>{{ trip_check.mhl_child_passengers }}</td>
+															  <td>{{ trip_check.mhl_adult_amount }}</td>
+															   <td>{{ trip_check.mhl_child_amount }}</td>
+															  <td><a class="btn btn-primary fs-14 text-white edit-icn" title="Edit" href="{% url 'app:trip_check_edit' %}?id={{ trip_check.id }}">
+																   	<i class="fe fe-edit fe-pen" title="Edit"></i>
+															   		</a>
+															  </td>
+														  </tr>
+                                                        {% endfor %}
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Row -->
+                      </div>
+					</div>
+				</div>
+
+
+
+{% endblock %}

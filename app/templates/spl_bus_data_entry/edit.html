@@ -1,0 +1,155 @@
+{% extends 'side_bar.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Update SPL Bus Data Entry Details</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="javascript:void(0);">SPL Bus Data Entry </a></li>
+										<li class="breadcrumb-item active" aria-current="page">Edit SPL Bus Data Entry</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+
+							<!-- row -->
+							<div class="row row-sm">
+								<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+									<div class="card box-shadow-0">
+										<div class="card-header border-bottom">
+											<h3 class="card-title">Edit SPL Bus Data Entry Form</h3>
+										</div>
+										<div class="card-body">
+											<form class="form-horizontal row" action="{% url 'app:spl_bus_data_entry_update' %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
+
+												<input type="hidden" name="id" value="{{spl_bus_data_entry_data.id}}">
+
+												<div class="col-sm-12 col-md-12 col-xl-6">
+													<div class="form-group">
+														<label class="form-label text-muted">SPL Bus Sending Depot:</label>
+														<select class="form-control custom-select" id="special_bus_sending_depot" name="special_bus_sending_depot" data-placeholder="Choose Sending Depot..." tabindex="-1" aria-hidden="true">
+															{% for depot_sending in depot_sending_data %}
+																<option value="{{ depot_sending.id }}"{% if depot_sending.id in depot_sending_list %} selected{% endif %}>{{ depot_sending.name }}</option>
+															{% endfor %}
+														</select>
+													</div>
+												</div>
+
+
+												<div class="col-sm-12 col-md-12 col-xl-6">
+													<div class="form-group">
+														<label class="form-label text-muted">Special Bus Reporting depot:</label>
+														<select class="form-control custom-select" id="special_bus_reporting_depot" name="special_bus_reporting_depot" data-placeholder="Choose Reporting Depot..." tabindex="-1" aria-hidden="true">
+															{% for depot_reporting in depot_reporting_data %}
+																<option value="{{ depot_reporting.id }}"{% if depot_reporting.id in depot_reporting_list %} selected{% endif %}>{{ depot_reporting.name }}</option>
+															{% endfor %}
+														</select>
+													</div>
+												</div>
+
+
+												<div class="col-sm-12 col-md-12 col-xl-6">
+													<div class="form-group">
+														<label class="form-label text-muted">Operation Type: </label>
+														<select class="form-control custom-select" id="opt_type" name="opt_type" data-placeholder="Choose Operation Type..." tabindex="-1" aria-hidden="true">
+															{% for operation_type in operation_type_data %}
+																<option value="{{ operation_type.id }}"{% if operation_type.id in bus_type_id_list %} selected{% endif %}>{{ operation_type.name }}</option>
+															{% endfor %}
+														</select>
+													</div>
+												</div>
+
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="vehicle_number">Bus Number</label>
+                                                    <select class="form-control custom-select select2 select2-show-search" name="vehicle_number" id="vehicle_number" required>
+                                                     	<option value="{{ spl_bus_data_entry_data.bus_number.bus_number }}" selected >{{ spl_bus_data_entry_data.bus_number.bus_number }}</option>
+                                                    </select>
+												</div>
+
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="log_sheet_no">Log Sheet No</label>
+                                                    <input type="text" id="log_sheet_no" name="log_sheet_no" class="form-control" value="{{spl_bus_data_entry_data.log_sheet_no}}" required>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="driver1_name">Driver1 Name</label>
+                                                    <input type="text" id="driver1_name" value="{{spl_bus_data_entry_data.driver1_name}}" name="driver1_name" class="form-control" required>
+												</div>
+
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="driver1_staff_no">Driver1 Staff Number</label>
+                                                    <input type="text" id="driver1_staff_no" value="{{spl_bus_data_entry_data.driver1_staff_no}}" name="driver1_staff_no" class="form-control" required>
+												</div>
+
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="driver1_phone_number">Driver1 Phone Number</label>
+                                                    <input type="text" id="driver1_phone_number" value="{{spl_bus_data_entry_data.driver1_phone_number}}" name="driver1_phone_number" class="form-control" required>
+												</div>
+
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="driver2_name">Driver2 Name</label>
+                                                    <input type="text" id="driver2_name" value="{{spl_bus_data_entry_data.driver2_name}}" name="driver2_name" class="form-control" required>
+												</div>
+
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="driver2_staff_no">Driver2 Staff Number</label>
+                                                    <input type="text" id="driver2_staff_no" value="{{spl_bus_data_entry_data.driver2_staff_no}}" name="driver2_staff_no" class="form-control" required>
+												</div>
+
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="driver2_phone_number">Driver2 Phone Number</label>
+                                                    <input type="text" id="driver2_phone_number" value="{{spl_bus_data_entry_data.driver2_phone_number}}" name="driver2_phone_number" class="form-control" >
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="incharge_name">Incharge Name</label>
+                                                    <input type="text" id="incharge_name" name="incharge_name" value="{{spl_bus_data_entry_data.incharge_name}}" class="form-control" >
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="incharge_phone_number">Incharge Phone Number</label>
+                                                    <input type="text" id="incharge_phone_number" value="{{spl_bus_data_entry_data.incharge_phone_number}}" name="incharge_phone_number" class="form-control" >
+												</div>
+
+
+												<div class="form-group mt-3">
+													<div>
+														<button type="submit" class="btn btn-primary">Submit</button>
+														<a href="{% url 'app:spl_bus_data_entry_list' %}" >
+															<button type="button" class="btn btn-secondary">Cancel</button>
+														</a>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- row -->
+						</div>
+					</div>
+				</div>
+				<!-- CONTAINER CLOSED -->
+
+{% endblock %}

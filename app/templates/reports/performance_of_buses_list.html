@@ -1,0 +1,125 @@
+{% extends 'side_bar.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Manage Performance of Buses List</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="javascript:void(0);">Manage Performance of Buses List</a></li>
+										<li class="breadcrumb-item active" aria-current="page">Performance of Buses List</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+
+
+
+							<!-- Row -->
+							<div class="row row-sm">
+								<div class="col-lg-12">
+<!--									<div class="row">-->
+<!--                                        <div class="col-md-12">-->
+<!--                                          	<a  href="{% url 'app:out_depot_vehicle_send_back_add' %}">-->
+<!--                                            <input type="button" value="Add Out Depot Vehicle Send Back" class="btn btn-primary float-right" style="float:right;margin: 0 20px 20px 0;"></a>-->
+<!--                                        </div>-->
+<!--                                      </div>-->
+									<div class="card">
+										{% if messages %}
+											{% for message in messages %}
+											<div class="container-fluid p-0">
+											  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+												<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+												  <span aria-hidden="True">&times;</span>
+												</button>
+												{{ message }}
+											  </div>
+											</div>
+											{% endfor %}
+										{% endif %}
+										<div class="card-body">
+
+											<form class="form-horizontal row" action="{% url 'app:search_depot_list' %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="depot_name">Search Depot Name</label>
+													<br>
+													<select class="form-control custom-select" name="depot_name" id="depot_name" required>
+                                                     	<option value="">Select Option</option>
+                                                        	{% for special_bus_sending in special_bus_sending_depot %}
+                                                            	<option value="{{ special_bus_sending.special_bus_sending_depot__id }}">
+                                                                	{{ special_bus_sending.special_bus_sending_depot__name }}
+                                                                </option>
+                                                            {% endfor %}
+                                                    </select>
+												</div>
+
+												<div class="form-group mt-3">
+													<div>
+														<button type="submit" class="btn btn-primary">Search</button>
+													</div>
+												</div>
+											</form>
+										</div>
+
+
+										<div class="card-header border-bottom">
+											<h3 class="card-title">Performance of Buses List</h3>
+										</div>
+										<div class="card-body">
+											<div class="table-responsive export-table">
+												<table id="listing-table" class="table table-bordered text-nowrap key-buttons border-bottom  w-100">
+													<thead>
+														<tr>
+															<th class="border-bottom-0">Operating Depot Name</th>
+															<th class="border-bottom-0">Allotted Buses Number</th>
+                                                            <th class="border-bottom-0">No of Trips</th>
+															<th class="border-bottom-0">No of Trips Up</th>
+															<th class="border-bottom-0">No of Trips Down</th>
+                                                            <th class="border-bottom-0">Total Passenger Transported</th>
+                                                            <th class="border-bottom-0">Total Earnings</th>
+
+														</tr>
+													</thead>
+													<tbody>
+														{% for performance_depot in performance_depot_result %}
+                                                          <tr>
+															  <td><b><a style="text-decoration:underline" href="{% url 'app:display_operating_depot_list' %}?id={{ performance_depot.depot_id }}">{{ performance_depot.depot_name }}</a></b></td>
+															  <td>{{ performance_depot.buses_allotted }}</td>
+                                                              <td>{{ performance_depot.no_of_trips_count }}</td>
+															  <td>{{ performance_depot.no_of_trips_up_count }}</td>
+															  <td>{{ performance_depot.no_of_trips_down_count }}</td>
+															  <td>{{ performance_depot.total_passenger_count }}</td>
+															  <td>{{ performance_depot.total_earnings_count }}</td>
+
+
+														  </tr>
+                                                        {% endfor %}
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Row -->
+                      </div>
+					</div>
+				</div>
+				<!-- CONTAINER CLOSED -->
+
+
+{% endblock %}

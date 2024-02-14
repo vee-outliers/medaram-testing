@@ -1,0 +1,413 @@
+
+/*** GENERAL BODY STYLES***/
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin-left: 60px;
+    margin-right: 30px;
+    font-family: 'Noto Sans', sans-serif;
+    color: #53565A; /* Cool Grey, ZRT Brand Color */
+    background-color: #FEFEFE; /* Puff, ZRT LN UI Kit */
+    line-height: 1.5em;
+}
+
+::-webkit-scrollbar {
+    background: rgba(45,47,49,1);
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(45,47,49,1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #53565A;
+}
+
+
+
+/*** LEFT BAR STYLES***/
+
+nav {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 325px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background: rgb(20,20,20);
+    background: linear-gradient(29deg, rgba(20,20,20,1) 0%, rgba(45,47,49,1) 52%, rgba(45,47,49,1) 100%); /* Colors adapted from ZRT LN UI Kit */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    line-height: 2em;
+}
+
+    nav::-webkit-scrollbar {
+        /*display: none;*/
+    }
+
+    nav img {
+        width: 250px;
+        margin: 20px 0px;
+        padding-left: 25px;
+    }
+
+    nav h1 {
+        color: #F5F5F540; /* Stone 25%, ZRT LN UI Kit */
+        margin-bottom: 20px;
+        padding-left: 25px;
+    }
+
+    nav ul {
+        margin: 0px 0px 20px 0px;
+        padding: 0;
+        list-style: none;
+    }
+
+        nav ul li a {
+            padding-left: 25px;
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 0.9em;
+            color: #F5F5F5; /* Stone, ZRT LN UI Kit */
+            text-decoration: none;
+            display: block;
+            font-weight: 300;
+        }
+
+            nav ul li a:hover {
+                background-color: #F5F5F540; /* Stone 80%, ZRT LN UI Kit */
+                border-radius: 2px;
+                opacity: 1;
+            }
+
+    nav > ul > li > a:first-child {
+        font-size: 1.0em;
+    }
+
+    nav > ul > li > ul li {
+        margin-left: 25px;
+    }
+
+.nav-update {
+    border-style: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-left: 10px;
+    opacity: 1;
+    font-size: 0.9em;
+}
+
+.nav-newTag {
+    color: #F5F5F540; /* Stone 25%, ZRT LN UI Kit */
+    margin-left: 10px;
+    font-size: 0.9em;
+}
+
+.nav-previewTag {
+    color: #8478E1FF; /* Light Purple, ZRT LN UI Kit */
+    margin-left: 10px;
+    opacity: 1;
+    font-size: 0.9em;
+}
+
+.nav-betaTag {
+    color: #B5BD00FF; /* Green, ZRT LN UI Kit */
+    margin-left: 10px;
+    opacity: 1;
+    font-size: 0.9em;
+}
+
+nav::-webkit-scrollbar {
+    background: rgba(45,47,49,1);
+}
+
+nav::-webkit-scrollbar-track {
+    background: rgba(45,47,49,1);
+}
+
+nav::-webkit-scrollbar-thumb {
+    background: #53565A80;
+}
+
+section ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.active {
+    /*opacity: 1; */
+    background-color: #890c58; /* Dark Sangria, ZRT LN UI Kit */
+    border-radius: 2px;
+    color: #F5F5F5FF;
+    font-weight: 700;
+}
+
+    .active:hover {
+        background-color: #AF1685;
+    }
+
+
+
+/*** RIGHT CONTENT STYLES***/
+.main {
+    margin-left: 325px; /* Same as the width of the sidebar */
+    padding: 10px 10px 25px 10px;
+}
+
+    .main a {
+        color: #AF1685; /* Light Sangria, ZRT LN UI Kit */
+    }
+
+em {
+    font-weight: 700;
+}
+
+h1 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+    color: #FFF;
+    font-size: 2.5em;
+    line-height: 1.2em;
+    padding-left: 16px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    margin-bottom: 10px;
+    margin-left: -30px;
+    margin-block-start: 10px;
+    margin-block-end: 0px;
+    margin-top: 40px;
+    font-size: 2em;
+    color: #53565A; /* Cool Grey, ZRT Brand Color */
+    vertical-align: middle;
+}
+
+h3 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    font-size: 1.75em;
+    /*padding-top: 20px;
+    margin-bottom:10px;*/
+    color: #53565A80; /* Cool Grey 50%, ZRT Brand Color */
+}
+
+h4 {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 1.3em;
+    /* margin-bottom:10px; */
+}
+
+h5 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 1.1em;
+    color: #53565A80; /* Cool Grey 50%, ZRT Brand Color */
+    margin-block-start: 10px;
+    margin-block-end: 10px;
+    /* margin-top:20px;
+    margin-bottom:10px; */
+}
+
+h6 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    /*margin-top:20px;
+    margin-bottom:10px; */
+    margin-block-start: 10px;
+    margin-block-end: 0px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+p .contentLabel {
+    color: red;
+}
+
+p {
+    width: 70%;
+    margin-block-start: 20px;
+    margin-block-end: 0em;
+}
+
+.body-previewTag {
+    background-color: #8478E1FF;
+    border-radius: 2px;
+    font-weight: 300px;
+    text-transform: uppercase;
+    color: #F5F5F5;
+    padding: 0px 5px;
+}
+
+.body-betaTag {
+    background-color: #B5BD00FF;
+    border-radius: 2px;
+    font-weight: 300px;
+    text-transform: uppercase;
+    color: #F5F5F5;
+    padding: 0px 5px;
+}
+
+.body-expTag {
+    background-color: #53565A80;
+    border-radius: 2px;
+    font-weight: 300px;
+    text-transform: uppercase;
+    color: #F5F5F5;
+    padding: 0px 5px;
+}
+
+hr {
+    margin-left: -30px;
+    color: #F5F5F5; /* Stone, ZRT LN UI Kit */
+}
+
+.section-visual {
+    color: #AF1685;
+    font-size: 1.25em;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+pre code {
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #F5F5F5; /* Stone, ZRT Brand Color */
+    background-color: rgb(45,47,49,1); /* Adapted from Cool Gray, ZRT Brand Color */
+    display: block;
+    overflow: auto;
+    max-height: 600px;
+    padding: 20px;
+    width: 70%;
+    margin-bottom: 0px
+}
+
+span code {
+    font-size: 13px;
+    color:; /* Stone, ZRT Brand Color */
+    background-color: #f7f7f7; /* Adapted from Cool Gray, ZRT Brand Color */
+    outline: 1px solid #53565A80;
+    display: inline-block;
+    margin-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+table {
+    width: 74%;
+    border: 1px solid rgb(45,47,49,1);
+    ; /* Grey, ZRT LN UI Kit */
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+    table tr td {
+        vertical-align: top;
+        padding: 10px;
+        font-size: 13px;
+        width: auto;
+    }
+
+        table tr td span.change {
+            margin-left: 10px;
+            border: 1px solid black;
+            width: 60px;
+            height: 18px;
+            text-align: center;
+            vertical-align: middle;
+            padding-top: 2px;
+            float: right;
+            color: black;
+        }
+            /* TAG FOR TABLE ITEMS: New Item Added */
+            table tr td span.change.added {
+                background-color: #B5BD00; /* Greem, ZRT Brand Color + LN UI Kit */
+                border-style: none;
+                border-radius: 0px;
+                font-weight: 300;
+                text-transform: uppercase;
+                color: #FFF;
+            }
+
+            /* TAG FOR TABLE ITEMS: Old Item Removed */
+            table tr td span.change.removed {
+                background-color: #E03C31; /* Red, ZRT Brand Color + LN UI Kit */
+                border-style: none;
+                border-radius: 0px;
+                font-weight: 300;
+                text-transform: uppercase;
+                color: #FFF;
+                padding-right: 4px;
+                padding-left: 4px;
+            }
+
+            /* TAG FOR TABLE ITEMS: Existing Item Altered */
+            table tr td span.change.modified {
+                background-color: #685BC7; /* Purple, ZRT Brand Color + LN UI Kit */
+                border-style: none;
+                border-radius: 0px;
+                font-weight: 300;
+                text-transform: uppercase;
+                color: #FFF;
+                padding-right: 4px;
+                padding-left: 4px;
+            }
+
+th, td, tr {
+    border: 1px solid #53565A80;  /* Grey, ZRT LN UI Kit */
+    border-collapse: collapse;
+}
+
+table tr td:first-child {
+    font-weight: bold;
+    width: auto;
+}
+
+tr:nth-child(odd) {
+    background-color: #f7f7f7; /* Adapted from Cool Gray, ZRT Brand Color */
+}
+
+p.note {
+    background-color: #FFF2FC; /* Customized magenta based off of ZRT official Sangria */
+    background-position: 9px 0px;
+    background-repeat: no-repeat;
+    border: solid 1px #AF1685; /* Light Sangria */
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    overflow: hidden;
+    padding: 20px;
+    margin-top: 20px;
+    width: calc(70%-20px);
+}
+
+code::-webkit-scrollbar {
+    background: rgba(45,47,49,1);
+}
+
+code::-webkit-scrollbar-track {
+    background: rgba(45,47,49,1);
+}
+
+code::-webkit-scrollbar-thumb {
+    background: #53565A80;
+}
+
+/*** FOOTER STYLES***/
+footer {
+    margin-left: 300px; /* Same as the width of the sidebar */
+    text-align: center;
+    padding: 50px 0px 20px 0px;
+}

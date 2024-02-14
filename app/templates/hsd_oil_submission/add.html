@@ -1,0 +1,176 @@
+{% extends 'side_bar.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Manage HSD Oil Submission</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="javascript:void(0);">Manage HSD Oil Submission</a></li>
+										<li class="breadcrumb-item active" aria-current="page">HSD Oil Submission</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+
+
+
+							<!-- Row -->
+							<div class="row row-sm">
+								<div class="col-lg-12">
+									<div class="row">
+                                        <div class="col-md-12">
+                                        </div>
+                                    </div>
+
+									<div class="card">
+										{% if messages %}
+											{% for message in messages %}
+											<div class="container-fluid p-0">
+											  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+												<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+												  <span aria-hidden="True">&times;</span>
+												</button>
+												{{ message }}
+											  </div>
+											</div>
+											{% endfor %}
+										{% endif %}
+										<div class="card-body">
+											<a  href="{% url 'app:hsd_oil_submission_list' %}"><input type="button" value="HSD Oil Submission List" class="btn btn-primary float-right" style="margin: 0 20px 20px 0;"></a>
+
+											<form class="form-horizontal row" action="{% url 'app:search_unique_no_bus_no_special_bus_data' %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
+												<div class="card mb-3">
+            										<div class="card-body">
+														<div class="row">
+												<div class="form-group col-md-6">
+													<label class="form-label" for="unique_no_bus_no">Unique No/Bus Number</label>
+													<input type="text" id="unique_no_bus_no" name="unique_no_bus_no" class="form-control" required>
+												</div>
+												<div class="form-group mt-3">
+													<div>
+														<button type="submit" class="btn btn-primary">Search</button>
+													</div>
+												</div>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+										<div class="card-header border-bottom">
+											<h3 class="card-title">Special Bus Details</h3>
+										</div>
+										<div class="card-body">
+											<form class="form-horizontal row" action="#" method="post" enctype="multipart/form-data"> {% csrf_token %}
+
+
+                                                <div class="form-group col-md-6">
+                                                    <label class="form-label">Alloted Depot Name</label>
+                                                    <input type="text" class="form-control" value="{{special_bus_data.special_bus_reporting_depot.name}}" readonly>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label">Bus Type</label>
+                                                    <input type="text" class="form-control" value="{{special_bus_data.bus_type.name}}" readonly>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label">Bus Number</label>
+                                                    <input type="text" id="out_depo_bus_number" class="form-control" value="{{special_bus_data.bus_number.bus_number}}" readonly>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" >New Log Sheet Number</label>
+                                                    <input type="text" class="form-control" value="{{special_bus_data.log_sheet_no}}" readonly>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" >Driver-1 Name</label>
+                                                    <input type="text" class="form-control" value="{{special_bus_data.driver1_name}}" readonly>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" >Driver-1 Phone no</label>
+                                                    <input type="text" class="form-control" value="{{special_bus_data.driver1_phone_number}}" readonly>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" >Driver-2 Name</label>
+                                                    <input type="text" class="form-control" value="{{special_bus_data.driver2_name}}" readonly>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" >Driver-2 Phone no</label>
+                                                    <input type="text" class="form-control" value="{{special_bus_data.driver2_phone_number}}" readonly>
+												</div>
+
+											</form>
+										</div>
+										<div class="card-header border-bottom">
+											<h3 class="card-title">HSD Oil Submission</h3>
+										</div>
+										<div class="card-body">
+											<form class="form-horizontal row" action="{% url 'app:hsd_oil_submission_add' %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
+
+												<input type="hidden" id="hsd_oil_bus_number" name="hsd_oil_bus_number" value="{{special_bus_data.bus_number.bus_number}}">
+
+												<input type="hidden" id="unique_bus_no" name="unique_bus_no" value="{{unique_bus_no}}">
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="point_name">Point Name</label>
+                                                    <input type="text" id="point_name" name="point_name" value="{{request.session.point_name}}" class="form-control" required>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="hsd_top_oil_liters">Hsd liters</label>
+                                                    <input type="text" id="hsd_top_oil_liters" name="hsd_top_oil_liters" class="form-control" required pattern="^\d{1,3}$" title="Please enter upto 3 digits only." oninput="validate_hsd_top_oilInput()">
+													<span id="validation_message" style="color: red;"></span>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="mts_no">MTS No</label>
+                                                    <input type="number" id="mts_no" name="mts_no" class="form-control" required>
+												</div>
+
+												<div class="form-group col-md-6">
+                                                    <label class="form-label" for="shift">Shift</label>
+                                                    <select class="form-control custom-select" id="shift" name="shift" required>
+														<option value="">Select Option</option>
+															<option value='day_shift'>Day Shift</option>
+															<option value='night_shift'>Night Shift</option>
+													</select>
+												</div>
+
+												<div class="form-group mt-3">
+													<div>
+														<button type="submit" class="btn btn-primary">Save HSD Oil Submission Info</button>
+														<a href="{% url 'app:hsd_oil_submission_list' %}">
+															<button type="button" class="btn btn-secondary">Cancel</button>
+														</a>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Row -->
+                      </div>
+					</div>
+				</div>
+
+
+{% endblock %}

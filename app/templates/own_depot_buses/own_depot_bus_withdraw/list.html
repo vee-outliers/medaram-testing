@@ -1,0 +1,92 @@
+{% extends 'side_bar.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block htmlbody %}
+
+<!--app-content open-->
+				<div class="app-content main-content mt-0">
+					<div class="side-app">
+						<!-- CONTAINER -->
+						<div class="main-container container-fluid">
+
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Manage Own Depot Bus Withdraw</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="javascript:void(0);">Manage Own Depot Bus Withdraw</a></li>
+										<li class="breadcrumb-item active" aria-current="page">Own Depot Bus Withdraw List</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+
+
+
+							<!-- Row -->
+							<div class="row row-sm">
+								<div class="col-lg-12">
+									<div class="row">
+                                        <div class="col-md-12">
+                                          	<a  href="{% url 'app:own_depot_bus_withdraw_add' %}">
+                                            <input type="button" value="Add Own Depot Bus Withdraw" class="btn btn-primary float-right" style="margin: 0 20px 20px 0;"></a>
+                                        </div>
+                                      </div>
+									<div class="card">
+										{% if messages %}
+											{% for message in messages %}
+											<div class="container-fluid p-0">
+											  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+												<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+												  <span aria-hidden="True">&times;</span>
+												</button>
+												{{ message }}
+											  </div>
+											</div>
+											{% endfor %}
+										{% endif %}
+										<div class="card-header border-bottom">
+											<h3 class="card-title">Own Depot Bus Withdraw List</h3>
+										</div>
+										<div class="card-body">
+											<div class="table-responsive export-table">
+												<table id="listing-table" class="table table-bordered text-nowrap key-buttons border-bottom  w-100">
+													<thead>
+														<tr>
+															<th class="border-bottom-0">Bus Number</th>
+                                                            <th class="border-bottom-0">Created At</th>
+															<th class="border-bottom-0">Actions</th>
+
+														</tr>
+													</thead>
+													<tbody>
+														{% for own_depot_bus_withdraw in own_depot_bus_withdraw_data %}
+                                                          <tr>
+															  <td>{{ own_depot_bus_withdraw.bus_number }}</td>
+                                                              <td>{{ own_depot_bus_withdraw.created_at }}</td>
+															  <td><a class="btn btn-primary fs-14 text-white edit-icn" title="Edit" href="{% url 'app:own_depot_bus_withdraw_edit' %}?id={{ own_depot_bus_withdraw.id }}">
+																   	<i class="fe fe-edit fe-pen" title="Edit"></i>
+															   		</a>
+															  </td>
+														  </tr>
+                                                        {% endfor %}
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Row -->
+                      </div>
+					</div>
+				</div>
+				<!-- CONTAINER CLOSED -->
+
+
+{% endblock %}
